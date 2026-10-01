@@ -1,1 +1,3 @@
-gcc main.c -o main -Wall -Wextra
+#!/bin/bash
+
+gcc main.c lexer.c parser.c -o main -Wall -Wextra
