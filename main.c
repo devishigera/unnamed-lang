@@ -3,6 +3,7 @@
 
 #include "lexer.h"
 #include "parser.h"
+#include "codegen.h"
 
 int main(){
 	
@@ -37,6 +38,19 @@ int main(){
 	Node* ast=parse(&tokens);
 
 	print_ast(ast,0);
+
+	FILE *out = fopen("output.s", "w");
+
+	if (out == NULL) {
+		perror("Could not create output.s");
+		return 1;
+	}
+
+	generate(ast, out);
+
+	fclose(out);
+
+	printf("Assembly generated successfully!\n");
 
 	return 0;
 }
