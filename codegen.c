@@ -97,13 +97,16 @@ static void begin_scope(CodeGen* g){
 }
 
 static void end_scope(CodeGen* g){
-    int start=g->scope_start[--g->scope_depth];
-    int count=g->var_count-start;
-    if(count>0){
-        emit(g,"add sp, sp, #%d",count+16);
+
+    int start = g->scope_start[--g->scope_depth];
+
+    int count = g->var_count - start;
+
+    if(count > 0){
+        emit(g, "add sp, sp, #%d", count * 16);
     }
-    g->var_count-=count;
-    g->scope_depth--;
+
+    g->var_count -= count;
 }
 
 // generates assembly for expressions
